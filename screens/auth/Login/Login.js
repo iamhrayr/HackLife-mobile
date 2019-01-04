@@ -3,10 +3,10 @@ import { AsyncStorage, View, TouchableOpacity } from 'react-native';
 import { Text, Container, Content, Form, Item, Input, Label, Button, Icon, Toast } from 'native-base';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import validator from "validator";
+import validator from 'validator';
 
 // import LOGIN from "./login.graphql";
-import styles from "./styles";
+import styles from './styles';
 
 class Login extends Component {
     state = {
@@ -17,7 +17,7 @@ class Login extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Login',
-        header: null
+        header: null,
     });
 
     componentDidUpdate() {
@@ -28,7 +28,7 @@ class Login extends Component {
                     text: value,
                     buttonText: 'Okay',
                     type: 'danger',
-                })
+                });
             });
         }
     }
@@ -50,54 +50,50 @@ class Login extends Component {
                     >
                         {(login, { loading, data, error }) => {
                             return (
-                            <>
-                                <Form>
-                                    <Item rounded style={styles.input} error={!!formError.email}>
-                                        <Icon
-                                            active
-                                            style={styles.inputIcon}
-                                            name='envelope'
-                                            type='SimpleLineIcons'
-                                        />
-                                        <Input
-                                            placeholder="Email"
-                                            value={email}
-                                            onChangeText={email => {
-                                                this.setState({ email });
-                                                this.setState({ formError: {} });
-                                            }}
-                                        />
-                                    </Item>
-                                    <Item rounded style={styles.input} error={!!formError.password}>
-                                        <Icon
-                                            active
-                                            style={styles.inputIcon}
-                                            name='lock'
-                                            type='SimpleLineIcons'
-                                        />
-                                        <Input
-                                            placeholder="Password"
-                                            value={password}
-                                            onChangeText={password => {
-                                                this.setState({ password })
-                                                this.setState({ formError: {} })
-                                            }}
-                                            secureTextEntry
-                                        />
-                                    </Item>
-                                </Form>
-                                <Button
-                                    primary 
-                                    block 
-                                    rounded
-                                    large
-                                    disabled={loading}
-                                    onPress={() => this._handleLogin(login)}
-                                >
-                                    <Text>Login</Text>
-                                </Button>
-                            </>
-                        )}}
+                                <React.Fragment>
+                                    <Form>
+                                        <Item rounded style={styles.input} error={!!formError.email}>
+                                            <Icon
+                                                active
+                                                style={styles.inputIcon}
+                                                name="envelope"
+                                                type="SimpleLineIcons"
+                                            />
+                                            <Input
+                                                placeholder="Email"
+                                                value={email}
+                                                onChangeText={email => {
+                                                    this.setState({ email });
+                                                    this.setState({ formError: {} });
+                                                }}
+                                            />
+                                        </Item>
+                                        <Item rounded style={styles.input} error={!!formError.password}>
+                                            <Icon active style={styles.inputIcon} name="lock" type="SimpleLineIcons" />
+                                            <Input
+                                                placeholder="Password"
+                                                value={password}
+                                                onChangeText={password => {
+                                                    this.setState({ password });
+                                                    this.setState({ formError: {} });
+                                                }}
+                                                secureTextEntry
+                                            />
+                                        </Item>
+                                    </Form>
+                                    <Button
+                                        primary
+                                        block
+                                        rounded
+                                        large
+                                        disabled={loading}
+                                        onPress={() => this._handleLogin(login)}
+                                    >
+                                        <Text>Login</Text>
+                                    </Button>
+                                </React.Fragment>
+                            );
+                        }}
                     </Mutation>
                 </Content>
 
@@ -115,16 +111,16 @@ class Login extends Component {
     }
 
     _validate = () => {
-        const { email, password} = this.state;
+        const { email, password } = this.state;
         const formError = {};
         let isValid = true;
 
         if (!validator.isEmail(email)) {
-            formError.email = "Please provide a valid email address";
+            formError.email = 'Please provide a valid email address';
             isValid = false;
         }
         if (validator.isEmpty(password)) {
-            formError.password = "Please enter your password";
+            formError.password = 'Please enter your password';
             isValid = false;
         }
 
@@ -135,9 +131,9 @@ class Login extends Component {
         }
 
         return isValid;
-    }
+    };
 
-    _handleLogin = (login) => {
+    _handleLogin = login => {
         const isValid = this._validate();
 
         if (!isValid) {
@@ -145,7 +141,7 @@ class Login extends Component {
         }
 
         login();
-    }
+    };
 
     _handleLoginCompleted = async res => {
         const token = res.login.token;
@@ -153,13 +149,13 @@ class Login extends Component {
         this.props.navigation.navigate('App');
     };
 
-    _handleLoginError = (error) => {
+    _handleLoginError = error => {
         error.graphQLErrors.map(({ message }) => {
             Toast.show({
                 text: message,
-                buttonText: "Okay",
-                type: "danger",
-                duration: 4000
+                buttonText: 'Okay',
+                type: 'danger',
+                duration: 4000,
             });
         });
     };

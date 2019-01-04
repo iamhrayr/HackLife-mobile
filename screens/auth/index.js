@@ -19,7 +19,7 @@ const AuthStack = createStackNavigator(
     },
     {
         // initialRouteName: 'Welcome',
-        initialRouteName: 'Login',
+        initialRouteName: 'Register',
         // mode: 'modal',
     },
 );
