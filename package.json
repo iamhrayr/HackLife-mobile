@@ -24,7 +24,8 @@
         "react-apollo": "^2.3.1",
         "react-dom": "^16.6.3",
         "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-        "react-navigation": "^3.0.2"
+        "react-navigation": "^3.0.2",
+        "validator": "^10.10.0"
     },
     "devDependencies": {
         "babel-plugin-import-graphql": "^2.6.2",

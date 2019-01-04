@@ -3,6 +3,7 @@ import { AsyncStorage, View, TouchableOpacity } from 'react-native';
 import { Text, Container, Content, Form, Item, Input, Label, Button, Icon, Toast } from 'native-base';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import validator from "validator";
 
 // import LOGIN from "./login.graphql";
 import styles from "./styles";
@@ -11,7 +12,7 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        error: null,
+        formError: {},
     };
 
     static navigationOptions = ({ navigation }) => ({
@@ -19,8 +20,21 @@ class Login extends Component {
         header: null
     });
 
+    componentDidUpdate() {
+        const { formError } = this.state;
+        if (formError) {
+            Object.values(formError).forEach(value => {
+                Toast.show({
+                    text: value,
+                    buttonText: 'Okay',
+                    type: 'danger',
+                })
+            });
+        }
+    }
+
     render() {
-        const { email, password } = this.state;
+        const { email, password, formError } = this.state;
 
         return (
             <Container>
@@ -38,20 +52,23 @@ class Login extends Component {
                             return (
                             <>
                                 <Form>
-                                    <Item rounded style={styles.input}>
+                                    <Item rounded style={styles.input} error={!!formError.email}>
                                         <Icon
-                                            active 
+                                            active
                                             style={styles.inputIcon}
                                             name='envelope'
-                                            type='SimpleLineIcons' 
+                                            type='SimpleLineIcons'
                                         />
                                         <Input
                                             placeholder="Email"
-                                            value={email} 
-                                            onChangeText={email => this.setState({ email })} 
+                                            value={email}
+                                            onChangeText={email => {
+                                                this.setState({ email });
+                                                this.setState({ formError: {} });
+                                            }}
                                         />
                                     </Item>
-                                    <Item rounded style={styles.input}>
+                                    <Item rounded style={styles.input} error={!!formError.password}>
                                         <Icon
                                             active
                                             style={styles.inputIcon}
@@ -61,7 +78,10 @@ class Login extends Component {
                                         <Input
                                             placeholder="Password"
                                             value={password}
-                                            onChangeText={password => this.setState({ password })}
+                                            onChangeText={password => {
+                                                this.setState({ password })
+                                                this.setState({ formError: {} })
+                                            }}
                                             secureTextEntry
                                         />
                                     </Item>
@@ -94,11 +114,37 @@ class Login extends Component {
         );
     }
 
-    _handleLogin = (login) => {
+    _validate = () => {
         const { email, password} = this.state;
-        if (email && password) {
-            
+        const formError = {};
+        let isValid = true;
+
+        if (!validator.isEmail(email)) {
+            formError.email = "Please provide a valid email address";
+            isValid = false;
         }
+        if (validator.isEmpty(password)) {
+            formError.password = "Please enter your password";
+            isValid = false;
+        }
+
+        if (!isValid) {
+            this.setState({ formError });
+        } else {
+            this.setState({ formError: {} });
+        }
+
+        return isValid;
+    }
+
+    _handleLogin = (login) => {
+        const isValid = this._validate();
+
+        if (!isValid) {
+            return;
+        }
+
+        login();
     }
 
     _handleLoginCompleted = async res => {
@@ -114,7 +160,7 @@ class Login extends Component {
                 buttonText: "Okay",
                 type: "danger",
                 duration: 4000
-            })
+            });
         });
     };
 }

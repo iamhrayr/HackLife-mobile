@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Input extends Component {
+class Field extends Component {
     render() {
         return (
             <Item rounded style={styles.input}>
