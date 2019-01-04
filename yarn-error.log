@@ -1,26 +1,26 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add apollo-provider
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.12.3/libexec/bin/yarn.js add ApolloLink
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Hrayr\bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Python27;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_172\bin;C:\WINDOWS\System32\OpenSSH;C:\PostgreSQL\pg10\bin;C:\Program Files\PostgreSQL\pg10\bin;C:\PostgreSQL\pg96\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\PuTTY;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Python27;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_172\bin;C:\Users\Hrayr\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Users\Hrayr\AppData\Local\Programs\Python\Python36-32;C:\Users\Hrayr\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\Hrayr\AppData\Local\hyper\app-2.0.0\resources\bin;C:\Users\Hrayr\AppData\Local\Android\Sdk\platform-tools;C:\Users\Hrayr\AppData\Roaming\npm;C:\Users\Hrayr\AppData\Local\Yarn\bin
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.7/bin
 
 Yarn version: 
   1.12.3
 
 Node version: 
-  10.13.0
+  10.14.2
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/apollo-provider: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65003:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129018:22)
+  Error: https://registry.yarnpkg.com/ApolloLink: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:65894:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129018:22)
       at Request.emit (events.js:182:13)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129990:10)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129990:10)
       at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129912:12)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.12.3/libexec/lib/cli.js:129912:12)
       at Object.onceWrapper (events.js:273:13)
       at IncomingMessage.emit (events.js:187:15)
       at endReadableNT (_stream_readable.js:1094:12)
@@ -42,6 +42,8 @@ npm manifest:
           "apollo-cache-inmemory": "^1.3.11",
           "apollo-client": "^2.4.7",
           "apollo-link": "^1.2.4",
+          "apollo-link-context": "^1.0.10",
+          "apollo-link-error": "^1.1.5",
           "apollo-link-http": "^1.5.7",
           "expo": "^31.0.2",
           "graphql": "^14.0.2",
@@ -49,11 +51,13 @@ npm manifest:
           "native-base": "^2.8.1",
           "react": "16.5.0",
           "react-apollo": "^2.3.1",
+          "react-dom": "^16.6.3",
           "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-          "react-navigation": "^3.0.0"
+          "react-navigation": "^3.0.2"
       },
       "devDependencies": {
-          "babel-preset-expo": "^5.0.0"
+          "babel-preset-expo": "^5.0.0",
+          "babel-root-slash-import": "^1.1.0"
       }
   }
 
@@ -710,22 +714,22 @@ Lockfile:
       pouchdb-collections "^1.0.1"
       tiny-queue "^0.2.1"
   
-  "@react-navigation/core@^3.0.0":
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.0.0.tgz#042c7fcb99331d7b452868d129b4e1cc3a4c60b9"
-    integrity sha512-WZH4notU5tZNxtQ1Vl/y8Z0685+nWtyJlfqKf6ybZruah8BC+sml3tKoBqCHzUTybCfYtRT7pPuCgvlpADe3UQ==
+  "@react-navigation/core@3.0.2":
+    version "3.0.2"
+    resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.0.2.tgz#8631801533a27d034a3b8421dfd0510a9f27dcf3"
+    integrity sha512-E0ETZJUuJRHvjtb0f0U416NcDxt9T5HvRLxXu5K4DNxtmjpOfkT9Sh+Q309/zrCwSkHY85ZpGKvewZTSGI7Q1Q==
     dependencies:
-      create-react-context "^0.2.3"
+      create-react-context "0.2.2"
       hoist-non-react-statics "^3.0.1"
       path-to-regexp "^1.7.0"
       query-string "^6.2.0"
       react-is "^16.5.2"
       react-lifecycles-compat "^3.0.4"
   
-  "@react-navigation/native@^3.0.1":
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.0.1.tgz#103916db63c60f7b5a88f278e99a924bc419f598"
-    integrity sha512-G8uQFIBI9LfSSA+wZraLI8/tGe9nlcRaiGq5/MPNsth2d4HHzAS2rfwUDlFp3K4iNscqJXbsH4WYhAbXT0umYg==
+  "@react-navigation/native@3.0.3":
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.0.3.tgz#6b1a6e15cde719e6c932bd78b23fa1417f6c0cab"
+    integrity sha512-1T3OnI6DpHPYvrb6OSMvdpcou0NAZKYBeOs66Uimy6oT5tkkj8jwaksAwuSCTIMxaRl1nROPd22yXYq6gBnUVA==
     dependencies:
       hoist-non-react-statics "^3.0.1"
       react-native-gesture-handler "^1.0.0"
@@ -901,6 +905,13 @@ Lockfile:
     optionalDependencies:
       "@types/async" "2.0.50"
   
+  apollo-link-context@^1.0.10:
+    version "1.0.10"
+    resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.10.tgz#c20b0b32c6e4e08c0d3967174f9c2a897c8431fe"
+    integrity sha512-HX3BEmkANs2A8AcYCy92SFJrW+0SbGrhDTSHV6ZwKIJ9ZrsOtly8cMrRLzEw1emjHIz5SP7XJEn3ko7BwhBBSw==
+    dependencies:
+      apollo-link "^1.2.4"
+  
   apollo-link-dedup@^1.0.0:
     version "1.0.11"
     resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.11.tgz#6f34ea748d2834850329ad03111ef18445232b05"
@@ -908,12 +919,27 @@ Lockfile:
     dependencies:
       apollo-link "^1.2.4"
   
+  apollo-link-error@^1.1.5:
+    version "1.1.5"
+    resolved "https://registry.yarnpkg.com/apollo-link-error/-/apollo-link-error-1.1.5.tgz#1d600dfa75c4e4bf017f50d60da7b375b53047ab"
+    integrity sha512-gE0P711K+rI3QcTzfYhzRI9axXaiuq/emu8x8Y5NHK9jl9wxh7qmEc3ZTyGpnGFDDTXfhalmX17X5lp3RCVHDQ==
+    dependencies:
+      apollo-link "^1.2.6"
+      apollo-link-http-common "^0.2.8"
+  
   apollo-link-http-common@^0.2.6:
     version "0.2.6"
     resolved "https://registry.yarnpkg.com/apollo-link-http-common/-/apollo-link-http-common-0.2.6.tgz#47b9012500599fe343e2e87378026384b4fc8c1f"
     integrity sha512-LUOMWvrZuBP1hyWLBXyaW0KyFeKo79j+k3N+Q4HSkXKbLibnllXQ+JxxoSKGhm0bhREygiLtJAG9JnGlhxGO/Q==
     dependencies:
       apollo-link "^1.2.4"
+  
+  apollo-link-http-common@^0.2.8:
+    version "0.2.8"
+    resolved "https://registry.yarnpkg.com/apollo-link-http-common/-/apollo-link-http-common-0.2.8.tgz#c6deedfc2739db8b11013c3c2d2ccd657152941f"
+    integrity sha512-gGmXZN8mr7e9zjopzKQfZ7IKnh8H12NxBDzvp9nXI3U82aCVb72p+plgoYLcpMY8w6krvoYjgicFmf8LO20TCQ==
+    dependencies:
+      apollo-link "^1.2.6"
   
   apollo-link-http@^1.5.7:
     version "1.5.7"
@@ -930,6 +956,14 @@ Lockfile:
     dependencies:
       apollo-utilities "^1.0.0"
       zen-observable-ts "^0.8.11"
+  
+  apollo-link@^1.2.6:
+    version "1.2.6"
+    resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.6.tgz#d9b5676d79c01eb4e424b95c7171697f6ad2b8da"
+    integrity sha512-sUNlA20nqIF3gG3F8eyMD+mO80fmf3dPZX+GUOs3MI9oZR8ug09H3F0UsWJMcpEg6h55Yy5wZ+BMmAjrbenF/Q==
+    dependencies:
+      apollo-utilities "^1.0.0"
+      zen-observable-ts "^0.8.13"
   
   apollo-utilities@1.0.26, apollo-utilities@^1.0.0, apollo-utilities@^1.0.26:
     version "1.0.26"
@@ -1492,6 +1526,13 @@ Lockfile:
       mkdirp "^0.5.1"
       source-map-support "^0.4.15"
   
+  babel-root-slash-import@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/babel-root-slash-import/-/babel-root-slash-import-1.1.0.tgz#27db03489f99669c520a1486dd4ad75d55dad7d8"
+    integrity sha1-J9sDSJ+ZZpxSChSG3UrXXVXa19g=
+    dependencies:
+      babel "^6.1.18"
+  
   babel-runtime@^6.22.0, babel-runtime@^6.26.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
@@ -1535,6 +1576,11 @@ Lockfile:
       esutils "^2.0.2"
       lodash "^4.17.4"
       to-fast-properties "^1.0.3"
+  
+  babel@^6.1.18:
+    version "6.23.0"
+    resolved "https://registry.yarnpkg.com/babel/-/babel-6.23.0.tgz#d0d1e7d803e974765beea3232d4e153c0efb90f4"
+    integrity sha1-0NHn2APpdHZb7qMjLU4VPA77kPQ=
   
   babylon@^6.18.0:
     version "6.18.0"
@@ -1971,10 +2017,10 @@ Lockfile:
       loose-envify "^1.3.1"
       object-assign "^4.1.1"
   
-  create-react-context@^0.2.3:
-    version "0.2.3"
-    resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.3.tgz#9ec140a6914a22ef04b8b09b7771de89567cb6f3"
-    integrity sha512-CQBmD0+QGgTaxDL3OX1IDXYqjkp2It4RIbcb99jS6AEg27Ga+a9G3JtK6SIu0HBwPLZlmwt9F7UwWA4Bn92Rag==
+  create-react-context@0.2.2:
+    version "0.2.2"
+    resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.2.tgz#9836542f9aaa22868cd7d4a6f82667df38019dca"
+    integrity sha512-KkpaLARMhsTsgp0d2NA/R94F/eDLbhXERdIq3LvX2biCAXcDvHYoOqHfWCHf1+OLj+HKBotLG3KqaOOf+C1C+A==
     dependencies:
       fbjs "^0.8.0"
       gud "^1.0.0"
@@ -4625,6 +4671,16 @@ Lockfile:
       shell-quote "^1.6.1"
       ws "^3.3.1"
   
+  react-dom@^16.6.3:
+    version "16.6.3"
+    resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.3.tgz#8fa7ba6883c85211b8da2d0efeffc9d3825cccc0"
+    integrity sha512-8ugJWRCWLGXy+7PmNh8WJz3g1TaTUt1XyoIcFN+x0Zbkoz+KKdUyx1AQLYJdbFXjuF41Nmjn5+j//rxvhFjgSQ==
+    dependencies:
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
+      prop-types "^15.6.2"
+      scheduler "^0.11.2"
+  
   react-is@^16.3.2, react-is@^16.5.2:
     version "16.6.3"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
@@ -4805,38 +4861,38 @@ Lockfile:
       xmldoc "^0.4.0"
       yargs "^9.0.0"
   
-  react-navigation-drawer@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.1.tgz#b419241e5f29b3399e1a0dd910ac3c58db78695c"
-    integrity sha512-H0GdNpEvTfP94AOg97Ih5GTnkHegsGziVTbbzBF06nX2C5moNZzoodXZ9fxhGuCayH/9WYnXTCdfOi8fKgU4ww==
+  react-navigation-drawer@1.0.5:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.5.tgz#d8cc71bd1779186261f3c3754b11f29aa98bd4f5"
+    integrity sha512-WeGrXFn84R75IAt3ndDfkHw9FNvPsi4JPGO1iopqUoA/2tMPA6WJbhuE3dqmmEu3TZRjI+2LatCgpx00tT1kiQ==
     dependencies:
       react-native-tab-view "^1.2.0"
   
-  react-navigation-stack@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.1.tgz#988a6bfa482042e995335c29d4c272647fa9172d"
-    integrity sha512-g/divE/w2tiaVSVDtgTInsgiXZDsWf+DF24S3aPWUKJSaR2C/7y1ggpoQGJDR/1gXi+/T23unaAGYfu5HK9Weg==
+  react-navigation-stack@1.0.6:
+    version "1.0.6"
+    resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.6.tgz#5c2b6617dccc1de6001b387cd967baa6b205132d"
+    integrity sha512-7vnoceO6d/KYvtOSi3Ui3u1gvZEF/dBrOn+Gb1zqiZ3t+0oWRPpU36OmXAh/SwI5aokQyoihAlH9UBMfp+fbEA==
   
-  react-navigation-tabs@^1.0.0:
-    version "1.0.0"
-    resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-1.0.0.tgz#f9fe3eb8b77787551d017d1279ec049c3bed4950"
-    integrity sha512-2oWPk+XfwHihgdOBhuAuzzU94NPhwdvuzseL30R3VsggunfVB4cUtNiQjRP4rVVpdGgJygQtws1eRbUsQ9cECA==
+  react-navigation-tabs@1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-1.0.2.tgz#cc6c61db0c61054388ef6f726a8ffc183d6095b5"
+    integrity sha512-ffWPVdo+L0GLbQlLAzH7ITYqh9V9NdqT/juj8QtESH5/2yUqfvqTxQoSowvFIrtiIHHFH6tLoQy1sZZciTxmeg==
     dependencies:
       hoist-non-react-statics "^2.5.0"
       prop-types "^15.6.1"
       react-lifecycles-compat "^3.0.4"
       react-native-tab-view "^1.0.0"
   
-  react-navigation@^3.0.0:
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.0.tgz#f7ab0fbd8c633ecd92b2bab630e409fb25115b40"
-    integrity sha512-vbehz/Ic77ayj1Cxd5tYM5LsxSwm8d0C/adSbUe+XFU2+x1vhDLejhQnZTWlU6VJFJgoHJkLrKd4zqaDAZ+YyA==
+  react-navigation@^3.0.2:
+    version "3.0.9"
+    resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.9.tgz#1c82f8ec2f87e2728816e79fb43d7b11ed265415"
+    integrity sha512-SFVlL96HIjMW9JiRhqwSn6RDP6MqeRMZHgf+hK/RMwSWLyfdZZEPKm3K/y/g1mg3l4Na4T3qnRMheGJF2dD0zw==
     dependencies:
-      "@react-navigation/core" "^3.0.0"
-      "@react-navigation/native" "^3.0.1"
-      react-navigation-drawer "^1.0.1"
-      react-navigation-stack "^1.0.1"
-      react-navigation-tabs "^1.0.0"
+      "@react-navigation/core" "3.0.2"
+      "@react-navigation/native" "3.0.3"
+      react-navigation-drawer "1.0.5"
+      react-navigation-stack "1.0.6"
+      react-navigation-tabs "1.0.2"
   
   react-proxy@^1.1.7:
     version "1.1.8"
@@ -5126,6 +5182,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
     integrity sha512-20+1KVo517sR7Nt+bYBN8a+bEJDKLPEx7Ohtts1kX05E4/HY53YUNuhfkVNItmWAnBYHcpG9vsd2/CJxG+aPCQ==
     dependencies:
+      object-assign "^4.1.1"
+  
+  scheduler@^0.11.2:
+    version "0.11.2"
+    resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.2.tgz#a8db5399d06eba5abac51b705b7151d2319d33d3"
+    integrity sha512-+WCP3s3wOaW4S7C1tl3TEXp4l9lJn0ZK8G3W3WKRWmw77Z2cIFUW2MiNTMHn5sCjxN+t7N43HAOOgMjyAg5hlg==
+    dependencies:
+      loose-envify "^1.1.0"
       object-assign "^4.1.1"
   
   "semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1:
@@ -5903,6 +5967,13 @@ Lockfile:
     version "0.8.11"
     resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.11.tgz#d54a27cd17dc4b4bb6bd008e5c096af7fcb068a9"
     integrity sha512-8bs7rgGV4kz5iTb9isudkuQjtWwPnQ8lXq6/T76vrepYZVMsDEv6BXaEA+DHdJSK3KVLduagi9jSpSAJ5NgKHw==
+    dependencies:
+      zen-observable "^0.8.0"
+  
+  zen-observable-ts@^0.8.13:
+    version "0.8.13"
+    resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.13.tgz#ae1fd77c84ef95510188b1f8bca579d7a5448fc2"
+    integrity sha512-WDb8SM0tHCb6c0l1k60qXWlm1ok3zN9U4VkLdnBKQwIYwUoB9psH7LIFgR+JVCCMmBxUgOjskIid8/N02k/2Bg==
     dependencies:
       zen-observable "^0.8.0"
   
