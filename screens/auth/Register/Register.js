@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { Text, Container, Content, Form, Item, Input, Label, Button, Icon, Toast } from 'native-base';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import validator from 'validator';
 
 import styles from './styles';
 
@@ -11,61 +12,76 @@ class Register extends Component {
         email: '',
         name: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        formError: {},
     };
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Register',
-        header: null
+        header: null,
     });
 
     render() {
-        const { name, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword, formError } = this.state;
 
         return (
             <Container>
                 <Content style={styles.container}>
                     <Text style={styles.title}>Create a new account</Text>
 
-                    <Mutation mutation={REGISTER} variables={{ email, password, name }}>
-                        {(register, { loading, data }) => (
+                    <Mutation
+                        mutation={CREATE_USER}
+                        variables={{ email, password, name }}
+                        onCompleted={this._handleCreateUserCompleted}
+                    >
+                        {(createUser, { loading, data }) => (
                             <React.Fragment>
                                 <Form>
-                                    <Item rounded style={styles.input}>
+                                    <Item rounded style={styles.input} error={!!(formError && formError.name)}>
                                         <Icon active style={styles.inputIcon} name="user" type="SimpleLineIcons" />
                                         <Input
                                             placeholder="name"
                                             value={name}
-                                            onChangeText={name => this.setState({ name })}
+                                            onChangeText={value => this._handleInputChange('name', value)}
                                         />
                                     </Item>
-                                    <Item rounded style={styles.input}>
+                                    <Item rounded style={styles.input} error={!!(formError && formError.email)}>
                                         <Icon active style={styles.inputIcon} name="envelope" type="SimpleLineIcons" />
                                         <Input
                                             placeholder="email"
                                             value={email}
-                                            onChangeText={email => this.setState({ email })}
+                                            onChangeText={value => this._handleInputChange('email', value)}
                                         />
                                     </Item>
-                                    <Item rounded style={styles.input}>
+                                    <Item rounded style={styles.input} error={!!(formError && formError.password)}>
                                         <Icon active style={styles.inputIcon} name="lock" type="SimpleLineIcons" />
                                         <Input
                                             placeholder="password"
                                             value={password}
-                                            onChangeText={password => this.setState({ password })}
+                                            onChangeText={value => this._handleInputChange('password', value)}
                                             secureTextEntry
                                         />
                                     </Item>
-                                    <Item rounded style={styles.input}>
+                                    <Item
+                                        rounded
+                                        style={styles.input}
+                                        error={!!(formError && formError.confirmPassword)}
+                                    >
                                         <Icon active style={styles.inputIcon} name="lock" type="SimpleLineIcons" />
                                         <Input
                                             placeholder="confirm password"
                                             value={confirmPassword}
-                                            onChangeText={confirmPassword => this.setState({ confirmPassword })}
+                                            onChangeText={value => this._handleInputChange('confirmPassword', value)}
                                             secureTextEntry
                                         />
                                     </Item>
-                                    <Button primary block rounded large onPress={() => this._handleRegister(register)}>
+                                    <Button
+                                        primary
+                                        block
+                                        rounded
+                                        large
+                                        onPress={() => this._handleCreateUser(createUser)}
+                                    >
                                         <Text>Register</Text>
                                     </Button>
                                 </Form>
@@ -86,21 +102,75 @@ class Register extends Component {
         );
     }
 
-    _handleRegister = register => {
-        const { password, confirmPassword } = this.state;
+    _handleInputChange = (key, value) => {
+        this.setState(prevState => {
+            const formError = Object.assign({}, prevState.formError);
+            delete formError[key];
 
-        if (password !== confirmPassword) {
-            // TODO: show error message
-            return null;
+            return {
+                [key]: value,
+                formError,
+            };
+        });
+    };
+
+    _validate = cb => {
+        const { name, email, password, confirmPassword } = this.state;
+        const formError = {};
+        let isValid = true;
+
+        if (password !== confirmPassword || confirmPassword == '') {
+            formError.confirmPassword = 'Confirm Password and Password do not match';
+            isValid = false;
+        }
+        if (validator.isEmpty(password)) {
+            formError.password = 'Please enter your password';
+            isValid = false;
+        }
+        if (!validator.isEmail(email)) {
+            formError.email = 'Please provide a valid email address';
+            isValid = false;
+        }
+        if (validator.isEmpty(name)) {
+            formError.name = 'Name is required';
+            isValid = false;
         }
 
-        register();
+        if (!isValid) {
+            this.setState({ formError }, cb(isValid));
+        } else {
+            this.setState({ formError: {} }, cb(isValid));
+        }
+
+        return isValid;
+    };
+
+    _handleCreateUser = createUser => {
+        this._validate(isValid => {
+            if (!isValid) {
+                const { formError } = this.state;
+
+                return Object.values(formError).forEach(value => {
+                    Toast.show({
+                        text: value,
+                        buttonText: 'Okay',
+                        type: 'danger',
+                    });
+                });
+            }
+
+            createUser();
+        });
+    };
+
+    _handleCreateUserCompleted = () => {
+        this.props.navigation.navigate('Login');
     };
 }
 
-const REGISTER = gql`
-    mutation register($email: String!, $password: String!, $name: String!) {
-        register(data: { email: $email, password: $password, name: $name }) {
+const CREATE_USER = gql`
+    mutation createUser($email: String!, $password: String!, $name: String!) {
+        createUser(data: { email: $email, password: $password, name: $name }) {
             token
             user {
                 id
