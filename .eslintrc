@@ -1,0 +1,16 @@
+{
+  "extends": ["plugin:prettier/recommended", "prettier/react"],
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": ["error", { "code": 120, "ignoreUrls": true }],
+    "prettier/prettier": [
+      "error",
+      {
+        "triangleComma": "all",
+        "singleQuote": true,
+        "printWidth": 120,
+        "tabWidth": 4
+      }
+    ]
+  }
+}

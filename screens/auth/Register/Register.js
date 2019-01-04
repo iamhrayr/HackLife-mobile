@@ -11,12 +11,12 @@ class Register extends Component {
         email: '',
         name: '',
         password: '',
-        confirmPassword: '',
+        confirmPassword: ''
     };
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Register',
-        header: null,
+        header: null
     });
 
     render() {
