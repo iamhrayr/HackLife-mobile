@@ -1,40 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { Container, Content, Header, Left, Right, Body, Title, Icon, Item, Input } from 'native-base';
+import { Container, Content, Header, Left, Right, Body, Title, Icon, Item, Input, Button } from 'native-base';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-class Home extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        // title: 'Home',
-        // header: <Header />,
-        // tabBarOptions: {
-        //     activeTintColor: '#0475f5',
-        //     inactiveTintColor: '#bec2cc',
-        // },
-        // tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        //     return <Icon name="list" style={{ color: tintColor }} />;
-        // },
-    });
-
+class SearchResult extends Component {
     render() {
         return (
             <Container>
                 <Header searchBar={true}>
-                    {/* <Left>
-                        <Text>bbb</Text>
-                    </Left> */}
-                    <Body>
-                        {/* <Title>Hacklives</Title> */}
+                    <Left style={{ flex: 0 }}>
+                        <Button transparent warning onPress={() => this.props.navigation.goBack()}>
+                            <Icon name="chevron-left" type="Octicons" style={{ fontSize: 24 }} />
+                            {/* <Icon name="arrow-left" type="SimpleLineIcons" style={{ fontSize: 16 }} /> */}
+                        </Button>
+                    </Left>
+                    <Body style={{ flex: 1 }}>
                         <Item rounded style={{ height: 32 }}>
-                            <Input
-                                placeholder="Search"
-                                onChangeText={() => this.props.navigation.navigate('SearchResult')}
-                            />
+                            <Input placeholder="Search" />
                             <Icon name="magnifier" type="SimpleLineIcons" style={{ fontSize: 16 }} />
                         </Item>
                     </Body>
-                    {/* <Right /> */}
+                    {/* <Right>
+                        <Icon name="md-rose" />
+                    </Right> */}
                 </Header>
                 <Content>
                     <Query query={FETCH_HACKLIVES_QUERY}>
@@ -49,6 +38,7 @@ class Home extends Component {
         );
     }
 }
+
 const FETCH_HACKLIVES_QUERY = gql`
     query fetchHacklives {
         hacklives {
@@ -59,4 +49,4 @@ const FETCH_HACKLIVES_QUERY = gql`
     }
 `;
 
-export default Home;
+export default SearchResult;
