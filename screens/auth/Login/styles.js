@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
     subTitle: {
         textAlign: 'center',
         fontSize: 16,
-        color: "#8B959A",
+        color: '#8B959A',
         marginBottom: 80,
     },
     bottomSection: {
         justifyContent: 'center',
         flexDirection: 'row',
         marginTop: 'auto',
-        marginBottom: 35
+        marginBottom: 35,
     },
     bottomSectionButton: {
         marginLeft: 5,
@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
         height: 56,
     },
     inputIcon: {
-        fontSize: 16, 
+        fontSize: 16,
         marginLeft: 10,
         marginTop: 3,
-    }
+    },
 });
 
 export default styles;

@@ -12,12 +12,12 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        formError: {}
+        formError: {},
     };
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Login',
-        header: null
+        header: null,
     });
 
     componentDidUpdate() {
@@ -27,7 +27,7 @@ class Login extends Component {
                 Toast.show({
                     text: value,
                     buttonText: 'Okay',
-                    type: 'danger'
+                    type: 'danger',
                 });
             });
         }
@@ -155,7 +155,7 @@ class Login extends Component {
                 text: message,
                 buttonText: 'Okay',
                 type: 'danger',
-                duration: 4000
+                duration: 4000,
             });
         });
     };

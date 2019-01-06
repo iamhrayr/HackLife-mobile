@@ -29,6 +29,7 @@ const TabStack = createBottomTabNavigator(
         },
     },
     {
+        // initialRouteName: 'Add',
         defaultNavigationOptions: ({ navigation }) => ({
             tabBarComponent: props => (
                 <Footer>

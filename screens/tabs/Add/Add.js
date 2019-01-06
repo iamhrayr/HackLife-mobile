@@ -17,48 +17,46 @@ import {
     Label,
     Textarea,
     Button,
+    Toast,
+    Switch,
 } from 'native-base';
 
-class Add extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: 'Add',
-        tabBarOptions: {
-            activeTintColor: '#0475f5',
-            inactiveTintColor: '#bec2cc',
-        },
-        tabBarIcon: ({ focused, horizontal, tintColor }) => {
-            return <Icon name="list" style={{ color: tintColor }} />;
-        },
-    });
+import AddTag from './AddTag';
+import TagList from './TagList';
+import styles from './styles';
 
+class Add extends Component {
     state = {
         title: '',
         body: '',
+        tags: [],
+        publish: false,
     };
 
     render() {
-        console.log('pppppppppppppp', this.props);
+        const { title, body, tags, published } = this.state;
+
         const mutationVariables = {
-            title: this.state.title,
-            body: this.state.body,
-            authorId: 'cjpu06z0j0rb901821o64fjw5',
+            title,
+            body,
+            tags,
+            published,
         };
 
         return (
             <Container>
                 <Header>
-                    {/* <Left /> */}
                     <Body>
-                        <Title>Add new hacklife</Title>
+                        <Title>Add a new hacklife</Title>
                     </Body>
-                    <Right />
                 </Header>
 
                 <Content style={styles.content}>
                     <Mutation
-                        mutation={createHacklife}
+                        mutation={CREATE_HACKLIFE}
+                        // refetchQueries={}
                         variables={mutationVariables}
-                        onError={e => console.log('error', e)}
+                        onCompleted={this._handleCreateHacklifeCompleted}
                     >
                         {(createHacklife, { loading }) => (
                             <>
@@ -70,17 +68,29 @@ class Add extends Component {
                                             onChangeText={title => this.setState({ title })}
                                         />
                                     </Item>
+
                                     <Item stackedLabel style={styles.item}>
                                         <Label>Body</Label>
                                         <Textarea
                                             rowSpan={5}
                                             style={styles.textarea}
-                                            value={this.state.b}
+                                            value={this.state.body}
                                             onChangeText={body => this.setState({ body })}
                                         />
                                     </Item>
+
+                                    <AddTag addTag={this._handleAddTag} />
+
+                                    <TagList tags={this.state.tags} removeTag={this._handleRemoveTag} />
+                                    <View>
+                                        <Text>Published?</Text>
+                                        <Switch
+                                            value={this.state.published}
+                                            onValueChange={published => this.setState({ published })}
+                                        />
+                                    </View>
                                 </Form>
-                                <Button success block basic onPress={() => createHacklife()}>
+                                <Button block rounded onPress={() => this._handleCreateHacklife(createHacklife)}>
                                     <Text>Save</Text>
                                 </Button>
                             </>
@@ -91,32 +101,53 @@ class Add extends Component {
         );
     }
 
-    _handleTextChange = e => {
-        console.log('eeeeeeeee', e);
-        console.log('this', this);
+    _handleAddTag = tag => {
+        const { tags } = this.state;
+
+        if (tags.includes(tag)) {
+            return Toast.show({
+                text: 'Tag is already added',
+                buttonText: 'Okay',
+                type: 'danger',
+                duration: 3000,
+            });
+        }
+
+        const tagsTemp = [...tags];
+        tagsTemp.push(tag);
+        this.setState({ tags: tagsTemp });
+    };
+
+    _handleRemoveTag = index => {
+        const { tags } = this.state;
+        const tagsTemp = [...tags];
+        tagsTemp.splice(index, 1);
+        this.setState({ tags: tagsTemp });
+    };
+
+    _handleCreateHacklife = createHacklife => {
+        const { title, body, tags, published } = this.state;
+        if (tags.length < 3 || !body || !title) {
+            // TODO: change with actual error
+            return Toast.show({
+                text: 'Some error',
+                type: 'danger',
+            });
+        }
+        createHacklife();
+    };
+
+    _handleCreateHacklifeCompleted = () => {
+        this.props.navigation.navigate('Home');
     };
 }
 
-const styles = StyleSheet.create({
-    content: {
-        paddingLeft: 15,
-        paddingRight: 15,
-    },
-    item: {
-        marginLeft: 0,
-    },
-    textarea: {
-        paddingLeft: 0,
-        marginTop: 10,
-        alignSelf: 'stretch',
-        borderWidth: 0,
-    },
-});
-
-const createHacklife = gql`
-    mutation createHacklife($title: String!, $body: String!, $authorId: ID!) {
-        createHacklife(title: $title, body: $body, authorId: $authorId) {
+const CREATE_HACKLIFE = gql`
+    mutation createHacklife($title: String!, $body: String!, $tags: [String!]!, $published: Boolean!) {
+        createHacklife(data: { title: $title, body: $body, tags: $tags, published: $published }) {
+            id
             title
+            body
         }
     }
 `;
