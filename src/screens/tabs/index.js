@@ -26,10 +26,13 @@ const TabStack = createBottomTabNavigator(
         },
         Add: {
             screen: AddScreen,
+            navigationOptions: ({ navigation }) => ({
+                tabBarComponent: props => null,
+            }),
         },
     },
     {
-        // initialRouteName: 'Add',
+        initialRouteName: 'Add',
         defaultNavigationOptions: ({ navigation }) => ({
             tabBarComponent: props => (
                 <Footer>

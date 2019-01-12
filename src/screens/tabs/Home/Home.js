@@ -49,39 +49,36 @@ class Home extends Component {
                             }
 
                             return data.hacklives.map(hacklife => (
-                                <>
-                                    {/* <Text key={hacklife.id}>{hacklife.title}</Text> */}
-                                    <Card>
-                                        <CardItem>
-                                            <Body>
-                                                <Text>{hacklife.title}</Text>
-                                            </Body>
-                                        </CardItem>
-                                        <CardItem cardBody>
-                                            {/* <Image
+                                <Card key={hacklife.id}>
+                                    <CardItem>
+                                        <Body>
+                                            <Text>{hacklife.title}</Text>
+                                        </Body>
+                                    </CardItem>
+                                    <CardItem cardBody>
+                                        {/* <Image
                                                 source={{ uri: 'Image URL' }}
                                                 style={{ height: 200, width: null, flex: 1 }}
                                             /> */}
-                                        </CardItem>
-                                        <CardItem>
-                                            <Left>
-                                                <Button transparent>
-                                                    <Icon active name="thumbs-up" />
-                                                    <Text>12 Likes</Text>
-                                                </Button>
-                                            </Left>
-                                            <Body>
-                                                <Button transparent>
-                                                    <Icon active name="chatbubbles" />
-                                                    <Text>4 Comments</Text>
-                                                </Button>
-                                            </Body>
-                                            <Right>
-                                                <Text>11h ago</Text>
-                                            </Right>
-                                        </CardItem>
-                                    </Card>
-                                </>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Left>
+                                            <Button transparent>
+                                                <Icon active name="thumbs-up" />
+                                                <Text>12 Likes</Text>
+                                            </Button>
+                                        </Left>
+                                        <Body>
+                                            <Button transparent>
+                                                <Icon active name="chatbubbles" />
+                                                <Text>4 Comments</Text>
+                                            </Button>
+                                        </Body>
+                                        <Right>
+                                            <Text>11h ago</Text>
+                                        </Right>
+                                    </CardItem>
+                                </Card>
                             ));
                         }}
                     </Query>

@@ -16,7 +16,7 @@ import Navigation from './Navigation';
 import getTheme from './native-base-theme/components';
 import custom from './native-base-theme/variables/custom';
 
-YellowBox.ignoreWarnings(['Remote debugger']);
+YellowBox.ignoreWarnings(['Remote debugger', 'ListView']);
 
 const authLink = setContext(async (req, { headers }) => {
     // AsyncStorage.clear();
@@ -53,7 +53,7 @@ const client = new ApolloClient({
 export default class App extends React.Component {
     state = {
         // loading: true,
-        loading: false,
+        // loading: false,
     };
 
     // async componentWillMount() {
@@ -65,14 +65,7 @@ export default class App extends React.Component {
     // }
 
     render() {
-        const { loading } = this.state;
-
-        return loading ? (
-            <>
-                // <Expo.AppLoading />
-                <Text>Hellw</Text>
-            </>
-        ) : (
+        return (
             <Root>
                 <StyleProvider style={getTheme(custom)}>
                     <ApolloProvider client={client}>

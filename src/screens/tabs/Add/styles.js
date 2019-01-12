@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
     content: {
         paddingLeft: 15,
         paddingRight: 15,
+        display: 'flex',
+        flex: 1,
     },
     item: {
         marginLeft: 0,
@@ -30,9 +32,42 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.08,
         shadowRadius: 4,
     },
-    // addTagInput: {
-    //     marginBottom: 5,
-    // },
+    richText: {
+        // height: 400,
+        flex: 1,
+        // height: '100%',
+        paddingLeft: 0,
+        paddingRight: 0,
+        backgroundColor: 'transparent',
+        // borderWidth: 1,
+    },
+    toolbar: {
+        backgroundColor: 'transparent',
+    },
+    toolbarButtonActive: {
+        backgroundColor: '#f8ba2c',
+        borderRadius: 0,
+    },
+    toolbarButton: {
+        backgroundColor: 'transparent',
+        borderRadius: 0,
+    },
+    toolbarButtonActiveIcon: {
+        color: '#fff',
+    },
+    toolbarButtonIcon: {
+        opacity: 0.7,
+    },
+    title: {
+        fontSize: 22,
+        paddingLeft: 0,
+        paddingRight: 0,
+        marginBottom: 15,
+        marginTop: 5,
+        flex: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+    },
 });
 
 export default styles;
